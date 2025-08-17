@@ -1,0 +1,41 @@
+ <!-- myproject/templates/base.html -->
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>
+            {% block title %}
+            
+            {% endblock %}
+        </title>
+        <!-- Add your CSS links here -->
+    </head>
+    <body>
+        <header>
+            {% if  request.user.is_authenticated %}
+                <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit">Logout</button>
+                </form>
+  
+            {% else %}
+                <a href="{% url 'login' %}">Login</a>
+            
+            {% endif %}
+            <!-- Shared header content -->
+        </header>
+
+        <main>
+            {% block content %}
+            <!-- Default content or a placeholder -->
+            {% endblock %}
+        </main>
+
+        <footer>
+            <!-- Shared footer content -->
+        </footer>
+
+        <!-- Add your JavaScript links here -->
+    </body>
+    </html>
